@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
+
     private Camera _camera;
 
     private Rigidbody2D   _player;
@@ -24,8 +26,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 _startPoint, _endPoint;
     private bool    _isDragging = false;
 
-    [SerializeField] private uint _availableJumps = 2;
+    [SerializeField]
+    private uint _maxJumps = 2;
+    private uint _availableJumps;
     private bool _canJump => _availableJumps > 0;
+
+    private void Awake() => Instance = this;
 
     private void Start()
     {
@@ -123,9 +129,13 @@ public class PlayerController : MonoBehaviour
    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        _availableJumps = 2;
-
-        ChangeColor();
+        collision.gameObject.GetComponent<IObstacle>().OnPlayerTouch();
         //Debug.Log(collision.gameObject.name);
+    }
+
+    public void ResetJumps() 
+    { 
+        _availableJumps = _maxJumps;
+        ChangeColor();
     }
 }

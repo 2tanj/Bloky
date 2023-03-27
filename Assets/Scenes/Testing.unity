@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 581483171}
   - component: {fileID: 581483170}
   - component: {fileID: 581483169}
+  - component: {fileID: 581483173}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -391,6 +392,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &581483173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581483168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2624af1006b888241a4196bc4299948d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &796286963
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +555,7 @@ MonoBehaviour:
   _maxDrag: 5
   _canJumpColor: {r: 1, g: 0, b: 0.83921576, a: 1}
   _cantJumpColor: {r: 0.19430864, g: 1, b: 0, a: 1}
-  _availableJumps: 2
+  _maxJumps: 2
 --- !u!120 &796286969
 LineRenderer:
   m_ObjectHideFlags: 0
