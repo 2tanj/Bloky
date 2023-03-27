@@ -21,7 +21,6 @@ public class BallHandler : MonoBehaviour
 
     private void Start()
     {
-		// testing
         _camera = Camera.main;
         _springJoint = _ball.GetComponent<SpringJoint2D>();
     }
