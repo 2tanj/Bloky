@@ -10,7 +10,7 @@ public class FloorRiser : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("value: " + _testing.Evaluate(Time.fixedTime).ToString("F3") + " time: " + Time.fixedTime);
+        //Debug.Log("value: " + _testing.Evaluate(Time.fixedTime).ToString("F3") + " time: " + Time.fixedTime);
 
         RaiseFloor();
     }
