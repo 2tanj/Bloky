@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FloorRiser : MonoBehaviour
 {
+    // https://docs.unity3d.com/Manual/EditingCurves.html
     [SerializeField]
     private AnimationCurve _testing;
 
