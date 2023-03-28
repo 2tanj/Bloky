@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
     private uint _availableJumps;
     private bool _canJump => _availableJumps > 0;
 
+
+    private int _maxHeight = 0;
+
     private void Awake() => Instance = this;
 
     private void Start()
@@ -43,6 +46,21 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update()
+    {
+        HandleMaxHeight();
+        HandleInput();
+    }
+
+    private void HandleMaxHeight()
+    {
+        if ((int)transform.position.y > _maxHeight)
+        {
+            _maxHeight = (int)transform.position.y;
+            UIManager.Instance.UpdateMaxHeightText(_maxHeight.ToString());
+        }
+    }
+
+    private void HandleInput()
     {
         if (!Touchscreen.current.primaryTouch.press.isPressed)
         {
