@@ -95,6 +95,9 @@ public class PlayerController : MonoBehaviour
 
         ChangeColor();
         _trajectory.positionCount = 0;
+
+        if (!FloorRiser.Instance.IsRising)
+            FloorRiser.Instance.ToggleRising();
     }
 
     private Vector3[] GetTrajectory()
@@ -147,12 +150,15 @@ public class PlayerController : MonoBehaviour
    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
-            Debug.Log("Game over");
+        if (collision.gameObject.tag   == "Ground" && 
+            GameManager.Instance.State == GameState.PLAYING)
+        {
+            Debug.Log("GameOver");
+            GameManager.Instance.GameOver();
+        }
 
         if (collision.gameObject.TryGetComponent<IObstacle>(out var obstacle))
             obstacle.OnPlayerTouch();
-        //Debug.Log(collision.gameObject.name);
     }
 
     public void ResetJumps() 

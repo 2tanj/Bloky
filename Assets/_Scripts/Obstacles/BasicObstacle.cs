@@ -9,8 +9,5 @@ public class BasicObstacle : MonoBehaviour, IObstacle
         PlayerController.Instance.ResetJumps();
     }
 
-    public GameObject GetGameObject()
-    {
-        return gameObject;
-    }
+    public GameObject GetGameObject() => gameObject;
 }

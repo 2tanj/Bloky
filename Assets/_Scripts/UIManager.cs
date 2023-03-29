@@ -12,5 +12,10 @@ public class UIManager : MonoBehaviour
 
     void Awake() => Instance = this;
 
+    public void GameOver()
+    {
+
+    }
+
     public void UpdateMaxHeightText(string text) => _heightText.text = text;
 }
