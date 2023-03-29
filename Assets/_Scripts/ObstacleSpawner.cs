@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _player;
+    [SerializeField] private Transform _player;
 
     [SerializeField] private GameObject[] _obstacles;
 
@@ -30,7 +30,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (_player.transform.position.y >= _heightThreshold)
+        if (_player.position.y >= _heightThreshold)
         {
             SpawnObstacles();
             _heightThreshold += _playerDistanceToSpawn;

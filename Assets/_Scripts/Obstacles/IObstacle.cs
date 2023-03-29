@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IObstacle
 {
     public void OnPlayerTouch();
+
+    public GameObject GetGameObject();
 }

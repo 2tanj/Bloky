@@ -150,7 +150,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
             Debug.Log("Game over");
 
-        collision.gameObject.GetComponent<IObstacle>().OnPlayerTouch();
+        if (collision.gameObject.TryGetComponent<IObstacle>(out var obstacle))
+            obstacle.OnPlayerTouch();
         //Debug.Log(collision.gameObject.name);
     }
 

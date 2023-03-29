@@ -23,7 +23,17 @@ public class FloorRiser : MonoBehaviour
     private void RaiseFloor()
     {
         var newPos = transform.position;
-        newPos.y += _testing.Evaluate(Time.fixedTime);
+        //newPos.y += _testing.Evaluate(Time.fixedTime);
+        newPos.y += .25f;
+
         transform.position = newPos;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<IObstacle>(out var obstacle))
+        {
+            Destroy(obstacle.GetGameObject());
+        }
     }
 }
