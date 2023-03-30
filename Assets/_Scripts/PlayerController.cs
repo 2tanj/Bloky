@@ -103,18 +103,18 @@ public class PlayerController : MonoBehaviour
     private Vector3[] GetTrajectory()
     {
         var rigidBody = GetComponent<Rigidbody2D>();
-        var pos = (Vector2)transform.position;
+        var pos       = (Vector2)transform.position;
 
         float timestep   = Time.fixedDeltaTime / Physics2D.velocityIterations;
         var gravityAccel = Physics2D.gravity * rigidBody.gravityScale * timestep * timestep;
 
         var force = _startPoint - GetWorldPosFromTouch();
-        force = Vector2.ClampMagnitude(force, _maxDrag) * (_jumpPower * 2);
+        force     = Vector2.ClampMagnitude(force, _maxDrag) * (_jumpPower * 2);
 
-        float drag = 1f - timestep * rigidBody.drag;
+        float drag   = 1f - timestep * rigidBody.drag;
         var moveStep = force * timestep;
 
-        var steps = force.magnitude * 50;
+        var steps   = force.magnitude * 50;
         var results = new Vector3[(int)steps];
 
         for (int i = 0; i < (int)steps; i++)

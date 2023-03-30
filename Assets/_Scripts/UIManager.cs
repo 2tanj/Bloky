@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     void Awake() => Instance = this;
 
     public void RestartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    public void GameOver() => _deathScreen.SetActive(true);
+    public void GameOver()    => _deathScreen.SetActive(true);
 
     public void UpdateMaxHeightText(string text) => _heightText.text = text;
 }
