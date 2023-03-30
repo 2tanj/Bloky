@@ -96,8 +96,8 @@ public class PlayerController : MonoBehaviour
         ChangeColor();
         _trajectory.positionCount = 0;
 
-        if (!FloorRiser.Instance.IsRising)
-            FloorRiser.Instance.ToggleRising();
+        if (GameManager.Instance.State == GameState.START)
+            GameManager.Instance.StartGame();
     }
 
     private Vector3[] GetTrajectory()
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag   == "Ground" && 
             GameManager.Instance.State == GameState.PLAYING)
         {
-            Debug.Log("GameOver");
+            Debug.LogError("GameOver");
             GameManager.Instance.GameOver();
         }
 

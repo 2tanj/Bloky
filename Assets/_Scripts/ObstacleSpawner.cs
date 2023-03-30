@@ -37,7 +37,6 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
-    //TODO: add DespawnObstacles, all obstacles that are under lava get destroyed
     private void SpawnObstacles()
     {
         for (int x = 0; x < _obstacleXAmount; x++)
@@ -59,6 +58,14 @@ public class ObstacleSpawner : MonoBehaviour
             }
             _lastPos.x = _leftMargin;
             _lastPos.y += _obstacleYGap;
+        }
+    }
+
+    private void DestroyObstacles()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
         }
     }
 
