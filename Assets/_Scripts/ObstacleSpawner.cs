@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _player;
+    [SerializeField] private Transform _player;
 
     [SerializeField] private GameObject[] _obstacles;
 
@@ -30,14 +30,13 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (_player.transform.position.y >= _heightThreshold)
+        if (_player.position.y >= _heightThreshold)
         {
             SpawnObstacles();
             _heightThreshold += _playerDistanceToSpawn;
         }
     }
 
-    //TODO: add DespawnObstacles, all obstacles that are under lava get destroyed
     private void SpawnObstacles()
     {
         for (int x = 0; x < _obstacleXAmount; x++)
@@ -60,6 +59,12 @@ public class ObstacleSpawner : MonoBehaviour
             _lastPos.x = _leftMargin;
             _lastPos.y += _obstacleYGap;
         }
+    }
+
+    private void DestroyObstacles()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+            Destroy(transform.GetChild(i).gameObject);
     }
 
     private void OnDrawGizmos()

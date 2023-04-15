@@ -95,23 +95,26 @@ public class PlayerController : MonoBehaviour
 
         ChangeColor();
         _trajectory.positionCount = 0;
+
+        if (GameManager.Instance.State == GameState.START)
+            GameManager.Instance.StartGame();
     }
 
     private Vector3[] GetTrajectory()
     {
         var rigidBody = GetComponent<Rigidbody2D>();
-        var pos = (Vector2)transform.position;
+        var pos       = (Vector2)transform.position;
 
         float timestep   = Time.fixedDeltaTime / Physics2D.velocityIterations;
         var gravityAccel = Physics2D.gravity * rigidBody.gravityScale * timestep * timestep;
 
         var force = _startPoint - GetWorldPosFromTouch();
-        force = Vector2.ClampMagnitude(force, _maxDrag) * (_jumpPower * 2);
+        force     = Vector2.ClampMagnitude(force, _maxDrag) * (_jumpPower * 2);
 
-        float drag = 1f - timestep * rigidBody.drag;
+        float drag   = 1f - timestep * rigidBody.drag;
         var moveStep = force * timestep;
 
-        var steps = force.magnitude * 50;
+        var steps   = force.magnitude * 50;
         var results = new Vector3[(int)steps];
 
         for (int i = 0; i < (int)steps; i++)
@@ -147,8 +150,15 @@ public class PlayerController : MonoBehaviour
    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collision.gameObject.GetComponent<IObstacle>().OnPlayerTouch();
-        //Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.tag   == "Ground" && 
+            GameManager.Instance.State == GameState.PLAYING)
+        {
+            Debug.LogError("GameOver");
+            GameManager.Instance.GameOver();
+        }
+
+        if (collision.gameObject.TryGetComponent<IObstacle>(out var obstacle))
+            obstacle.OnPlayerTouch();
     }
 
     public void ResetJumps() 
