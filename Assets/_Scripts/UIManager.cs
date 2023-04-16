@@ -27,11 +27,12 @@ public class UIManager : MonoBehaviour
 
     private void ShowBlokyFloorDistance()
     {
-        _floorDistance.gameObject.SetActive(!FloorRiser.Instance.IsFloorOnScreen());
-        _floorDistance.text = GetBlokyFloorDistance();
+        if (float.Parse(FloorRiser.Instance.GetFloorToBottomDistance()) > 0)
+        {
+            _floorDistance.gameObject.SetActive(true);
+            _floorDistance.text = FloorRiser.Instance.GetFloorToBottomDistance();
+        }
+        else
+            _floorDistance.gameObject.SetActive(false);
     }
-    private string GetBlokyFloorDistance() => (
-        PlayerController.Instance.transform.position.y - PlayerController.Instance.transform.localScale.y / 2 - 
-        FloorRiser.Instance.transform.position.y - FloorRiser.Instance.transform.localScale.y / 2)
-        .ToString("F2");
 }

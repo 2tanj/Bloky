@@ -25,11 +25,6 @@ public class FloorRiser : MonoBehaviour
             RaiseFloor();
     }
 
-    void Start()
-    {
-        Debug.Log(_testing.Evaluate(2f));
-    }
-
     private void RaiseFloor()
     {
         var newPos = transform.position;
@@ -49,10 +44,15 @@ public class FloorRiser : MonoBehaviour
             GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    public bool IsFloorOnScreen() => 
-        GeometryUtility.TestPlanesAABB(
-            GeometryUtility.CalculateFrustumPlanes(
-                Camera.main), GetComponent<SpriteRenderer>().bounds);
+    public string GetFloorToBottomDistance() => (
+        Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).y -
+        transform.position.y - Instance.transform.localScale.y / 2)
+        .ToString("F2");
+
+    //public bool IsFloorOnScreen() => 
+    //    GeometryUtility.TestPlanesAABB(
+    //        GeometryUtility.CalculateFrustumPlanes(
+    //            Camera.main), GetComponent<SpriteRenderer>().bounds);
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
