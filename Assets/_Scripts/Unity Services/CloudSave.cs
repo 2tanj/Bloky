@@ -26,19 +26,18 @@ public static class CloudSave
         }
     }
 
-    public static async Task LoadDataAsync(params string[] keys)
+    // this returns a PlayerData object
+    public static async Task LoadPlayerData()
     {
-        var cao = new HashSet<string>(keys);
-
         try
         {
             var data = await _client.LoadAllAsync();
-
             Debug.Log("Data successfuly loaded.");
-            foreach (KeyValuePair<string, string> test in data)
-            {
-                Debug.Log($"{test.Key} --- {test.Value}");
-            }
+
+            data.ToList()
+                .ForEach(pair => {
+                    Debug.Log($"{pair.Key} -- {pair.Value}");
+                });
         }
         catch (Exception e)
         {

@@ -34,7 +34,7 @@ public class UnityServicesInitialization : MonoBehaviour
             //        new { Name = "second", HS = 20 },
             //        new { Name = "third", HS = 30 }
             //    });
-            await CloudSave.LoadDataAsync();
+            await CloudSave.LoadPlayerData();
         }
         catch (Exception e)
         {
