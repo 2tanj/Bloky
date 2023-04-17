@@ -13,6 +13,12 @@ public static class PlayerAuthentication
     // player loses progress on app uninstall
     public static async Task SignInAnonymouslyAsync()
     {
+        if (_service.IsSignedIn)
+        {
+            Debug.Log("Player is already signed in.");
+            return;
+        }
+
         try
         {
             await _service.SignInAnonymouslyAsync();

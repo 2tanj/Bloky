@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Unity.Services.CloudSave;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public static class CloudSave
 {
@@ -31,6 +32,8 @@ public static class CloudSave
     {
         try
         {
+            //JsonConvert.DeserializeObject<T>(input)
+
             var data = await _client.LoadAllAsync();
             Debug.Log("Data successfuly loaded.");
 
