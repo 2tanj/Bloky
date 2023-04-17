@@ -18,14 +18,14 @@ public class UIManager : MonoBehaviour
 
     void Awake() => Instance = this;
 
-    void Update() => ShowBlokyFloorDistance();
+    void Update() => ShowFloorDistance();
 
     public void RestartGame() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     public void GameOver()    => _deathScreen.SetActive(true);
 
     public void UpdateMaxHeightText(string text) => _heightText.text = text;
 
-    private void ShowBlokyFloorDistance()
+    private void ShowFloorDistance()
     {
         if (float.Parse(FloorRiser.Instance.GetFloorToBottomDistance()) > 0)
         {
