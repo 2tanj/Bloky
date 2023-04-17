@@ -4,6 +4,7 @@ using Unity.Services.Core;
 using Unity.Services.Authentication;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class UnityServicesInitialization : MonoBehaviour
 {
@@ -25,6 +26,15 @@ public class UnityServicesInitialization : MonoBehaviour
             SetupAuthEvents();
 
             await PlayerAuthentication.SignInAnonymouslyAsync();
+
+            //await CloudSave.SaveDataAsync(
+            //    "maps", 
+            //    new List<object> { 
+            //        new { Name = "first", HS = 10 },
+            //        new { Name = "second", HS = 20 },
+            //        new { Name = "third", HS = 30 }
+            //    });
+            await CloudSave.LoadDataAsync();
         }
         catch (Exception e)
         {
@@ -35,7 +45,7 @@ public class UnityServicesInitialization : MonoBehaviour
     private void SetupAuthEvents()
     {
         AuthenticationService.Instance.SignedIn += () => {
-            Debug.Log("Player succesfully signed in");
+            Debug.Log("Player succesfully signed in.");
             Debug.Log($"PlayerID: {AuthenticationService.Instance.PlayerId}");
             Debug.Log($"AccessToken: {AuthenticationService.Instance.AccessToken}");
         };
