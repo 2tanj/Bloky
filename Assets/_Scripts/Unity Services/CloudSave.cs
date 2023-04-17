@@ -32,12 +32,12 @@ public static class CloudSave
 
         try
         {
-            var data = _client.LoadAllAsync().Result;
+            var data = await _client.LoadAllAsync();
 
             Debug.Log("Data successfuly loaded.");
             foreach (KeyValuePair<string, string> test in data)
             {
-                Debug.Log($"{test.Key} {test.Value}");
+                Debug.Log($"{test.Key} --- {test.Value}");
             }
         }
         catch (Exception e)
