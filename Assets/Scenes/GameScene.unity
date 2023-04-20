@@ -154,10 +154,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 796286967}
   _obstacles:
-  - Rate: 0
-  - Rate: 0
-  - Rate: 0
-  - Rate: 0
+  - Obstacle: {fileID: 7554042438156271621, guid: b34ec74e1b7f153408b19da676966fb8, type: 3}
+    Rate: 1
+  - Obstacle: {fileID: 7554042438156271621, guid: 618edcc437ddd79458cf566d670d1cd8, type: 3}
+    Rate: 1
+  - Obstacle: {fileID: 1195147104457902594, guid: d11239d483fb7274e919781ef55f5307, type: 3}
+    Rate: 0.528
+  - Obstacle: {fileID: 6378776610552479524, guid: 7263b861de3bf9e42b3fd60ecf82521e, type: 3}
+    Rate: 0.248
+  - Obstacle: {fileID: 588909181185947591, guid: aeaa7ff277ea7ae4f9ab789673f2286b, type: 3}
+    Rate: 1
   _leftMargin: -18.5
   _rightMargin: 19
   _obstacleXAmount: 10
@@ -1143,6 +1149,7 @@ MonoBehaviour:
   _maxDrag: 5
   _canJumpColor: {r: 1, g: 0, b: 0.83921576, a: 1}
   _cantJumpColor: {r: 0.19430864, g: 1, b: 0, a: 1}
+  _freezeColor: {r: 0, g: 0.96862745, b: 1, a: 1}
   _maxJumps: 2
 --- !u!120 &796286969
 LineRenderer:

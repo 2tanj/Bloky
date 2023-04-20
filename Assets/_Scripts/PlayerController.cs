@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private Color _currentColor => _canJump ? _canJumpColor : _cantJumpColor;
     [SerializeField] private Color _canJumpColor;
     [SerializeField] private Color _cantJumpColor;
+    [SerializeField] private Color _freezeColor;
 
 
     private Vector2 _startPoint, _endPoint;
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
         get => __availableJumps;
         set {
             __availableJumps = value;
-            ChangeColor();
+            ChangeColor(_currentColor);
         }
     }
 
@@ -92,6 +93,9 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        if (_player.bodyType == RigidbodyType2D.Static)
+            Unfreeze();
+
         _endPoint = GetWorldPosFromTouch();
 
         var force = _startPoint - _endPoint;
@@ -145,10 +149,10 @@ public class PlayerController : MonoBehaviour
         _trajectory.SetPositions(trajectory);
     }
 
-    private void ChangeColor()
+    private void ChangeColor(Color color)
     {
-        _player.GetComponent<SpriteRenderer>().color = _currentColor;
-        _trail.startColor                            = _currentColor;
+        _player.GetComponent<SpriteRenderer>().color = color;
+        _trail.startColor                            = color;
     }
 
     private Vector2 GetWorldPosFromTouch() => 
@@ -156,6 +160,12 @@ public class PlayerController : MonoBehaviour
 
     public void ResetJumps() => _availableJumps = _maxJumps;
     public void AddJump()    => _availableJumps++;
+    public void Unfreeze()   => _player.bodyType = RigidbodyType2D.Dynamic;
+    public void Freeze()
+    {
+        _player.bodyType = RigidbodyType2D.Static;
+        ChangeColor(_freezeColor);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
