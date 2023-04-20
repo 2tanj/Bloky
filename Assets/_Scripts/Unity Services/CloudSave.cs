@@ -41,6 +41,13 @@ public static class CloudSave
                 .ForEach(pair => {
                     Debug.Log($"{pair.Key} -- {pair.Value}");
                 });
+
+
+            //var cao = JsonConvert.DeserializeObject(
+            //            data.Where(pair => pair.Key == "maps")
+            //                .Select(pair => pair.Value).First());
+
+            //Debug.Log("custom object: " + cao);
         }
         catch (Exception e)
         {

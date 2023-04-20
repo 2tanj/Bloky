@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class BasicObstacle : MonoBehaviour, IObstacle
 {
-    public void       OnPlayerTouch() => PlayerController.Instance.ResetJumps();
-    public GameObject GetGameObject() => gameObject;
+    public virtual void       OnPlayerTouch() => PlayerController.Instance.ResetJumps();
+    public virtual GameObject GetGameObject() => gameObject;
 }

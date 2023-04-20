@@ -52,8 +52,7 @@ public class ObstacleSpawner : MonoBehaviour
                     Debug.LogWarning("Reached right margain while generating obstacles.");
                     continue;
                 }
-
-                Instantiate(_obstacles[0], newPos, Quaternion.identity, transform);
+                Instantiate(_obstacles.RandomItem(), newPos, Quaternion.identity, transform);
                 _lastPos = newPos;
             }
             _lastPos.x = _leftMargin;

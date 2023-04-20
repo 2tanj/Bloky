@@ -155,6 +155,8 @@ MonoBehaviour:
   _player: {fileID: 796286967}
   _obstacles:
   - {fileID: 7554042438156271621, guid: b34ec74e1b7f153408b19da676966fb8, type: 3}
+  - {fileID: 7554042438156271621, guid: 618edcc437ddd79458cf566d670d1cd8, type: 3}
+  - {fileID: 1195147104457902594, guid: d11239d483fb7274e919781ef55f5307, type: 3}
   _leftMargin: -18.5
   _rightMargin: 19
   _obstacleXAmount: 10
