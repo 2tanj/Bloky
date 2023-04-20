@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private Transform _player;
 
-    [SerializeField] private GameObject[] _obstacles;
+    [SerializeField] private ObstacleData[] _obstacles;
 
     [Range(-50, 50)]
     [SerializeField] private float _leftMargin, _rightMargin;
@@ -52,7 +53,7 @@ public class ObstacleSpawner : MonoBehaviour
                     Debug.LogWarning("Reached right margain while generating obstacles.");
                     continue;
                 }
-                Instantiate(_obstacles.RandomItem(), newPos, Quaternion.identity, transform);
+                Instantiate(GetRandomWeightedObstacle(), newPos, Quaternion.identity, transform);
                 _lastPos = newPos;
             }
             _lastPos.x = _leftMargin;
@@ -60,11 +61,29 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
-    private void DestroyObstacles()
+    private GameObject GetRandomWeightedObstacle()
     {
-        for (int i = 0; i < transform.childCount; i++)
-            Destroy(transform.GetChild(i).gameObject);
+        float max = _obstacles
+            .Select(o => o.Rate)
+            .Sum();
+        float rand = Random.Range(0, max);
+
+        float current = 0;
+        foreach (var obstacle in _obstacles)
+        {
+            if (rand >= current && rand < current + obstacle.Rate)
+                return obstacle.Obstacle;
+            else
+                current += obstacle.Rate;
+        }
+        return default;
     }
+
+    //private void DestroyObstacles()
+    //{
+    //    for (int i = 0; i < transform.childCount; i++)
+    //        Destroy(transform.GetChild(i).gameObject);
+    //}
 
     private void OnDrawGizmos()
     {
@@ -73,4 +92,13 @@ public class ObstacleSpawner : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(new Vector2(_leftMargin, _heightThreshold), new Vector2(_rightMargin, _heightThreshold));
     }
+}
+
+[System.Serializable]
+struct ObstacleData
+{
+    public GameObject Obstacle;
+
+    [Range(0, 1)]
+    public float Rate;
 }

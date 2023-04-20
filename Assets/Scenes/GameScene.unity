@@ -154,10 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 796286967}
   _obstacles:
-  - {fileID: 7554042438156271621, guid: b34ec74e1b7f153408b19da676966fb8, type: 3}
-  - {fileID: 7554042438156271621, guid: 618edcc437ddd79458cf566d670d1cd8, type: 3}
-  - {fileID: 1195147104457902594, guid: d11239d483fb7274e919781ef55f5307, type: 3}
-  - {fileID: 6378776610552479524, guid: 7263b861de3bf9e42b3fd60ecf82521e, type: 3}
+  - Rate: 0
+  - Rate: 0
+  - Rate: 0
+  - Rate: 0
   _leftMargin: -18.5
   _rightMargin: 19
   _obstacleXAmount: 10
@@ -382,10 +382,10 @@ GameObject:
   m_Component:
   - component: {fileID: 581483172}
   - component: {fileID: 581483171}
+  - component: {fileID: 581483169}
   - component: {fileID: 581483170}
   - component: {fileID: 581483173}
   - component: {fileID: 581483174}
-  - component: {fileID: 581483169}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Ground
