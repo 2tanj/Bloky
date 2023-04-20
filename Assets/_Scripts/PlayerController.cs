@@ -28,8 +28,16 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private uint _maxJumps = 2;
-    private uint _availableJumps;
     private bool _canJump => _availableJumps > 0;
+
+    private uint __availableJumps; // very ugly.
+    public uint _availableJumps {
+        get => __availableJumps;
+        set {
+            __availableJumps = value;
+            ChangeColor();
+        }
+    }
 
 
     private int _maxHeight = 0;
@@ -93,7 +101,6 @@ public class PlayerController : MonoBehaviour
         _player.AddForce(force, ForceMode2D.Impulse);
         _availableJumps--;
 
-        ChangeColor();
         _trajectory.positionCount = 0;
 
         if (GameManager.Instance.State == GameState.START)
@@ -147,10 +154,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 GetWorldPosFromTouch() => 
         _camera.ScreenToWorldPoint(Touchscreen.current.primaryTouch.position.ReadValue());
 
-   
+    public void ResetJumps() => _availableJumps = _maxJumps;
+    public void AddJump()    => _availableJumps++;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") && 
+        if (collision.gameObject.CompareTag("Ground") &&
             GameManager.Instance.State == GameState.PLAYING)
         {
             Debug.LogError("GameOver");
@@ -161,9 +170,9 @@ public class PlayerController : MonoBehaviour
             obstacle.OnPlayerTouch();
     }
 
-    public void ResetJumps() 
-    { 
-        _availableJumps = _maxJumps;
-        ChangeColor();
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<IObstacle>(out var obstacle))
+            obstacle.OnPlayerTouch();
     }
 }
